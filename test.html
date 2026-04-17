@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Expense</title>
+</head>
+
+<body>
+
+  <h2>Expense Tester</h2>
+
+  <!-- Button -->
+  <button onclick="addExpense()">Add</button>
+
+  <p id="result"></p>
+  
+
+  <script>
+    function addExpense() {
+      fetch("http://localhost:5000/api/expenses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          amount: 200,
+          category: "Food",
+          description: "Lunch"
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        document.getElementById("result").innerText = "Expense Added!";
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    }
+  </script>
+
+</body>
+</html>
